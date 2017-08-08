@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+ <tlib-version>1.0</tlib-version>
+ <short-name>mvcpaging</short-name>
+ <uri>mvcpaging</uri>
+  
+ <tag>
+  <name>Pager</name>
+  <tag-class>br.org.mvcpaging.Pager</tag-class>
+  <body-content>scriptless</body-content>
+      
+  <attribute>
+   <name>lista</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>PagedList</type>
+   <required>true</required>
+  </attribute>
+  
+  <attribute>
+   <name>pageSize</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>Integer</type>
+   <required>true</required>
+  </attribute>
+  
+  <attribute>
+   <name>previousPageText</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>String</type>
+   <required>false</required>
+  </attribute>
+  
+  <attribute>
+   <name>previousPageTitle</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>String</type>
+   <required>false</required>
+  </attribute>
+  
+  <attribute>
+   <name>nextPageText</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>String</type>
+   <required>false</required>
+  </attribute>
+  
+  <attribute>
+   <name>nextPageTitle</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>String</type>
+   <required>false</required>
+  </attribute>
+  
+  <attribute>
+   <name>firstPageText</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>String</type>
+   <required>false</required>
+  </attribute>
+  
+  <attribute>
+   <name>firstPageTitle</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>String</type>
+   <required>false</required>
+  </attribute>
+  
+  <attribute>
+   <name>lastPageText</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>String</type>
+   <required>false</required>
+  </attribute>
+  
+  <attribute>
+   <name>lastPageTitle</name>
+   <rtexprvalue>false</rtexprvalue>
+   <type>String</type>
+   <required>false</required>
+  </attribute>
+  
+  <attribute>
+   <name>routeOptions</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>String</type>
+   <required>false</required>
+  </attribute>
+  
+  <attribute>
+   <name>requestMapping</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>String</type>
+   <required>false</required>
+  </attribute>
+  
+  <attribute>
+   <name>updateTargetId</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>String</type>
+   <required>false</required>
+  </attribute>
+  
+  <attribute>
+   <name>classTemplate</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>String</type>
+   <required>false</required>
+  </attribute>
+  
+  
+  <attribute>
+   <name>displayFirstPage</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>boolean</type>
+   <required>false</required>
+  </attribute>
+  
+  <attribute>
+   <name>displayLastPage</name>
+   <rtexprvalue>true</rtexprvalue>
+   <type>boolean</type>
+   <required>false</required>
+  </attribute>
+  
+   
+ </tag>
+</taglib>
