@@ -47,6 +47,48 @@ public class PagedList<E> extends ArrayList<E> {
   this(source, 0, 1);
  }
 
+ public Integer getTotalCount() {
+  return totalCount;
+ }
+
+ public int getPageCount() {
+  return PageCount;
+ }
+
+ public int getTotalItemCount() {
+  return TotalItemCount;
+ }
+
+ public int getPageSize() {
+  return PageSize;
+ }
+
+ public boolean isHasPreviousPage() {
+  return HasPreviousPage;
+ }
+
+ public boolean isHasNextPage() {
+  return HasNextPage;
+ }
+
+ public boolean isIsFirstPage() {
+  return IsFirstPage;
+ }
+
+ public boolean isIsLastPage() {
+  return IsLastPage;
+ }
+
+ public int getItemStart() {
+  return ItemStart;
+ }
+
+ public int getItemEnd() {
+  return ItemEnd;
+ }
+ 
+ 
+
  public PagedList(List<E> source, int index, int pageSize) {
   if (index < 0) {
    throw new RuntimeException("index Value can not be below 0.");
