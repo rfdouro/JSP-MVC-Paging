@@ -29,6 +29,7 @@ public class Pager extends SimpleTagSupport {
  private String requestMapping;
  private String updateTargetId;
  private String classTemplate;
+ private Integer maxNrOfPages;
 
  public void setPageSize(int pageSize) {
   this.pageSize = pageSize;
@@ -120,6 +121,10 @@ public class Pager extends SimpleTagSupport {
 
  public void setClassTemplate(String classTemplate) {
   this.classTemplate = classTemplate;
+ }
+
+ public void setMaxNrOfPages(int maxNrOfPages) {
+  this.maxNrOfPages = maxNrOfPages;
  }
 
  public Pager(int pageSize, int currentPage, int totalItemCount) {
@@ -217,10 +222,10 @@ public class Pager extends SimpleTagSupport {
 
   int start = 1;
   int end = pageCount;
-  int nrOfPagesToDisplay = this.pagerOptions.MaxNrOfPages;
+  int nrOfPagesToDisplay = (this.maxNrOfPages == null) ? this.pagerOptions.MaxNrOfPages : this.maxNrOfPages;
 
   if (pageCount > nrOfPagesToDisplay) {
-   int middle = (int) Math.ceil(nrOfPagesToDisplay / 2.0) - 1;
+   int middle = (int) Math.ceil(((double) nrOfPagesToDisplay) / 2.0) - 1;
    int below = (currentPage - middle);
    int above = (currentPage + middle);
 
@@ -236,6 +241,8 @@ public class Pager extends SimpleTagSupport {
    end = above;
   }
 
+  /*
+  //código original
   if (start > 1) {
    plink = model.new PaginationLink();
    plink.Active = true;
@@ -244,6 +251,7 @@ public class Pager extends SimpleTagSupport {
    plink.Url = GeneratePageUrl(1);
    model.PaginationLinks.add(plink);
    if (start > 3) {
+    plink = model.new PaginationLink();
     plink.Active = true;
     plink.PageIndex = 2;
     plink.DisplayText = "2";
@@ -251,32 +259,45 @@ public class Pager extends SimpleTagSupport {
     model.PaginationLinks.add(plink);
    }
    if (start > 2) {
+    plink = model.new PaginationLink();
     plink.Active = false;
     plink.DisplayText = "...";
     plink.IsSpacer = true;
     model.PaginationLinks.add(plink);
    }
+  }*/
+  
+  //variáveis auxiliares
+  int ant = (currentPage + 1) - (nrOfPagesToDisplay / 2);
+  int dep = (currentPage + 1) + (nrOfPagesToDisplay / 2);
+
+  if (currentPage == pageCount - 1) {
+   ant--;
   }
 
-  for (int i = start; i <= end; i++) {
+  if (currentPage == 0) {
+   dep++;
+  }
+
+  //for (int i = start; i <= end; i++) {
+  for (int i = 1; i <= pageCount; i++) {
    plink = model.new PaginationLink();
+   plink.Active = true;
+   plink.PageIndex = i;
+   plink.DisplayText = "" + i;
+   plink.DisplayTitle = "" + i;
    if (i == currentPage + 1 || (currentPage <= 0 && i == 1)) {
-    plink.Active = true;
-    plink.PageIndex = i;
     plink.IsCurrent = true;
-    plink.DisplayText = "" + i;
-    plink.DisplayTitle = "" + i;
-    model.PaginationLinks.add(plink);
    } else {
-    plink.Active = true;
-    plink.PageIndex = i;
-    plink.DisplayText = "" + i;
-    plink.DisplayTitle = "" + i;
     plink.Url = GeneratePageUrl(i);
+   }
+   if (i >= ant && i <= dep) {
     model.PaginationLinks.add(plink);
    }
   }
 
+  /*
+  //código original
   if (end < pageCount) {
    if (end < pageCount) {
     plink = model.new PaginationLink();
@@ -294,11 +315,11 @@ public class Pager extends SimpleTagSupport {
     plink.Url = GeneratePageUrl(pageCount);
     model.PaginationLinks.add(plink);
    }
-  }
-
+  }*/
   // Next page
   if (!this.pagerOptions.HidePreviousAndNextPage) {
    String nextPageText = this.pagerOptions.NextPageText;
+   String nextPageTitle = this.pagerOptions.NextPageTitle;
    if (currentPage < pageCount - 1) {
     plink = model.new PaginationLink();
     plink.Active = true;
@@ -311,7 +332,7 @@ public class Pager extends SimpleTagSupport {
     plink = model.new PaginationLink();
     plink.Active = false;
     plink.DisplayText = nextPageText;
-    plink.DisplayTitle = nextPageText;
+    plink.DisplayTitle = nextPageTitle;
     model.PaginationLinks.add(plink);
    }
   }
@@ -329,10 +350,9 @@ public class Pager extends SimpleTagSupport {
 
   return model;
  }
- 
- 
+
  public String ToHtmlString() {
-  
+
   PaginationModel model = BuildPaginationModel();
 
   StringBuilder sb = new StringBuilder();
@@ -365,5 +385,5 @@ public class Pager extends SimpleTagSupport {
   }
   return sb.toString();
 
- } 
+ }
 }
